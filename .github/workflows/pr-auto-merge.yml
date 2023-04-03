@@ -1,0 +1,39 @@
+name: automerge
+on:
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+      - synchronize
+      - opened
+      - edited
+      - ready_for_review
+      - reopened
+      - unlocked
+  pull_request_review:
+    types:
+      - submitted
+  check_suite:
+    types:
+      - completed
+  status: {}
+  
+jobs:
+  auto-pr-merge:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - name: generate app install token
+        id: my-app
+        uses: getsentry/action-github-app-token@v2
+        with:
+          app_id: ${{ secrets.GH_APP_ID }}
+          private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          
+      - name: Auto merge PR
+        if: ${{ github.actor != 'dependabot[bot]' }}
+        run: |
+          gh pr merge "$PR_URL" --auto --rebase
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ steps.my-app.outputs.token }}
