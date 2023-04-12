@@ -30,6 +30,7 @@ jobs:
             let weekNumber = Math.floor ((jsTime + 345_600_000) / 604_800_000);
             console.log(`weekNumber: ${weekNumber}`)
             isEven = (weekNumber%2 == 0)
+            console.log(`isEven: ${isEven}`)
             return isEven;
 
       # Runs a single command using the runners shell
