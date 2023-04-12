@@ -28,7 +28,8 @@ jobs:
           script: |
             let jsTime = new Date().getTime();
             let weekNumber = Math.floor ((jsTime + 345_600_000) / 604_800_000);
-            console.log(`weekNumbe: ${weekNumber}`)                        
+            console.log(`weekNumbe: ${weekNumber}`)
+            return weekNumber;
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
