@@ -34,10 +34,9 @@ jobs:
   runReport:
     runs-on: ubuntu-latest
     needs: getWeekNumber
-    steps:
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        if: ${{ needs.getWeekNumber.outputs.weekNumber == 'true' }}      
+    if: ${{ needs.getWeekNumber.outputs.weekNumber == 'true' }}
+    steps:    
+      - name: Generate Report            
         run: |
           echo Hello, world!
           echo ${{ needs.getWeekNumber.outputs.weekNumber }}
