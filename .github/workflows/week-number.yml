@@ -29,11 +29,12 @@ jobs:
             let jsTime = new Date().getTime();
             let weekNumber = Math.floor ((jsTime + 345_600_000) / 604_800_000);
             console.log(`weekNumber: ${weekNumber}`)
-            return weekNumber;
+            isEven = (weekNumber%2 == 0)
+            return isEven;
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        if: ${{ steps.get-week-number.outputs.result }} % 2 != 0
+        if: ${{ steps.get-week-number.outputs.result === true }}
         run: echo Hello, world!
 
     
