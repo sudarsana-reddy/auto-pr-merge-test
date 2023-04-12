@@ -10,13 +10,25 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
+    outputs:
+      weekNumber: ${{ steps.get-week-number.outputs.result }}
     steps:
-      - name: test
-        run: echo "Job1"
+      - name: Get Week Number from epoch
+        id: get-week-number
+        uses: actions/github-script@v6
+        with:          
+          script: |
+            let jsTime = new Date().getTime();
+            let weekNumber = Math.floor ((jsTime + 345_600_000) / 604_800_000);
+            console.log(`weekNumber: ${weekNumber}`)
+            isEven = (weekNumber%2 == 0)
+            console.log(`isEven: ${isEven}`)
+            return isEven;
   
   job2:
     uses: ./.github/workflows/reusable.yml
     needs: job1
+    if: ${{ needs.getWeekNumber.outputs.weekNumber == 'true' }}
     with:
       PRACTICE: "AWS"
     secrets: inherit
