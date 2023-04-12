@@ -7,7 +7,7 @@ on:
   
   workflow_dispatch:
   schedule:
-    - cron: 45 7 * * 3 
+    - cron: 45 3 * * 4
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -39,7 +39,4 @@ jobs:
       - name: Generate Report            
         run: |
           echo Hello, world!
-          echo ${{ needs.getWeekNumber.outputs.weekNumber }}     
-          exit 1
-
-    
+          echo ${{ needs.getWeekNumber.outputs.weekNumber }}
