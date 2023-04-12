@@ -4,7 +4,7 @@ name: Generate Report - Schedule - Alternate Fridays
 on:  
   workflow_dispatch:
   schedule:
-    - cron: 12 13 * * 3
+    - cron: 20 13 * * 3
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -28,7 +28,7 @@ jobs:
   job2:
     uses: ./.github/workflows/reusable.yml
     needs: getWeekNumber
-    if: ${{ needs.getWeekNumber.outputs.weekNumber != 'true' }}
+    if: ${{ needs.getWeekNumber.outputs.weekNumber == 'true' }}
     with:
       PRACTICE: "AWS"
     secrets: inherit
