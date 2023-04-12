@@ -28,12 +28,12 @@ jobs:
           script: |
             let jsTime = new Date().getTime();
             let weekNumber = Math.floor ((jsTime + 345_600_000) / 604_800_000);
-            console.log(`weekNumbe: ${weekNumber}`)
+            console.log(`weekNumber: ${weekNumber}`)
             return weekNumber;
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        if: ${{ steps.set-result.outputs.result }} % 2 != 0
+        if: ${{ steps.get-week-number.outputs.result }} % 2 != 0
         run: echo Hello, world!
 
     
