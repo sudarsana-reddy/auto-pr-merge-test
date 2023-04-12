@@ -34,7 +34,7 @@ jobs:
   runReport:
     runs-on: ubuntu-latest
     needs: getWeekNumber
-    if: ${{ needs.getWeekNumber.outputs.weekNumber != 'true' }}
+    if: ${{ needs.getWeekNumber.outputs.weekNumber == 'true' }}
     steps:    
       - name: Generate Report            
         run: |
