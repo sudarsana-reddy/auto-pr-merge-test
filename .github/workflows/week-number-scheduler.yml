@@ -3,33 +3,18 @@ name: Generate Report - Schedule - Alternate Fridays
 # Controls when the workflow will run
 on:  
   schedule:
-    - cron: 45 12 * * 3
+    - cron: 12 13 * * 3
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-   getWeekNumber:
-    # The type of runner that the job will run on
+  job1:
     runs-on: ubuntu-latest
-    outputs:
-      weekNumber: ${{ steps.get-week-number.outputs.result }}
-      
     steps:
-      - name: Get Week Number from epoch
-        id: get-week-number
-        uses: actions/github-script@v6
-        with:          
-          script: |
-            let jsTime = new Date().getTime();
-            let weekNumber = Math.floor ((jsTime + 345_600_000) / 604_800_000);
-            console.log(`weekNumber: ${weekNumber}`)
-            isEven = (weekNumber%2 == 0)
-            console.log(`isEven: ${isEven}`)
-            return isEven;
- 
-    generateReport:
-      needs: getWeekNumber
-      if: ${{ needs.getWeekNumber.outputs.weekNumber == 'true' }}
-      uses: ./.github/workflows/reusable.yml
-      with:
-        PRACTICE: AWS
-      secrets: inherit
+      - name: test
+        run: echo "Job1"
+  
+  job2:
+    uses: ./.github/workflows/reusable.yml
+    with:
+      PRACTICE: "AWS"
+    secrets: inherit
