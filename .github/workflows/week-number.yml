@@ -33,7 +33,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        if: ${{ (steps.set-result.outputs.result)%2 == 0 }}
+        if: ${{ steps.set-result.outputs.result }} % 2 == 0
         run: echo Hello, world!
 
     
