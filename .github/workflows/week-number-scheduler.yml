@@ -16,6 +16,7 @@ jobs:
   
   job2:
     uses: ./.github/workflows/reusable.yml
+    needs: job1
     with:
       PRACTICE: "AWS"
     secrets: inherit
