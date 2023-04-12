@@ -8,7 +8,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  job1:
+  getWeekNumber:
     runs-on: ubuntu-latest
     outputs:
       weekNumber: ${{ steps.get-week-number.outputs.result }}
