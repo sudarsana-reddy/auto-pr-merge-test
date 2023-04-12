@@ -28,7 +28,7 @@ jobs:
   job2:
     uses: ./.github/workflows/reusable.yml
     needs: getWeekNumber
-    if: ${{ needs.getWeekNumber.outputs.weekNumber == 'true' }}
+    if: ${{ needs.getWeekNumber.outputs.weekNumber != 'true' }}
     with:
       PRACTICE: "AWS"
     secrets: inherit
