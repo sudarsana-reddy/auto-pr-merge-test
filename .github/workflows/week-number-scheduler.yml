@@ -4,17 +4,17 @@ name: Generate Report - Schedule - Alternate Fridays
 on:  
   workflow_dispatch:
   schedule:
-    - cron: 20 13 * * 3
+    - cron: 26 10 * * 4
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  getWeekNumber:
+  get-week-number:
     runs-on: ubuntu-latest
     outputs:
-      weekNumber: ${{ steps.get-week-number.outputs.result }}
+      weekNumber: ${{ steps.getWeekNumber.outputs.result }}
     steps:
       - name: Get Week Number from epoch
-        id: get-week-number
+        id: getWeekNumber
         uses: actions/github-script@v6
         with:          
           script: |
@@ -27,8 +27,8 @@ jobs:
   
   job2:
     uses: ./.github/workflows/reusable.yml
-    needs: getWeekNumber
-    if: ${{ needs.getWeekNumber.outputs.weekNumber == 'true' }}
+    needs: get-week-number
+    if: ${{ needs.get-week-number.outputs.weekNumber == 'true' }}
     with:
       PRACTICE: "AWS"
     secrets: inherit
