@@ -20,3 +20,4 @@ jobs:
           echo Hello, world!
           echo "input-PRACTICE: ${{ inputs.PRACTICE }}"
           echo "GH_APP_CLIENT_ID: ${{ secrets.GH_APP_CLIENT_ID }}"
+          echo "GH_VAR_TEST: ${{ vars.GH_VAR_TEST }}"
