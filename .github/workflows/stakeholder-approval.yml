@@ -1,0 +1,14 @@
+name: Stakeholder Approval
+
+on:
+ workflow_dispatch:
+ 
+jobs:
+ deploy:
+ 
+  runs-on: ubuntu-latest
+  environment: dev
+  steps:
+  - name: print job
+    run: echo deployment job
+ 
