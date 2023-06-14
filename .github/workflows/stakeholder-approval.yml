@@ -5,10 +5,17 @@ on:
  
 jobs:
  deploy:
- 
   runs-on: ubuntu-latest
   environment: dev
   steps:
   - name: print job
     run: echo deployment job
+
+ qa:
+  runs-on: ubuntu-latest
+  environment: dev
+  needs: deploy
+  steps:
+  - name: print job
+    run: echo "qa job"
  
